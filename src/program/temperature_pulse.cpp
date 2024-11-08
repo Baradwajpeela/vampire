@@ -48,6 +48,9 @@
 #include "vio.hpp"
 #include "vmath.hpp"
 #include "vmpi.hpp"
+#include "internal.hpp"
+
+namespace pgi = program::internal;
 
 /// function forward declarations
 double two_temperature_function(double ftime);
@@ -263,6 +266,10 @@ void temperature_pulse(){
       }
    }
 
+	// Save input applied field strength and set to zero for equilibration ** added
+	const double max_field = sim::H_applied;
+	sim::H_applied = 0.0;
+
    // Equilibrate system
 	while(sim::time<sim::equilibration_time){
 
@@ -275,6 +282,18 @@ void temperature_pulse(){
 		vout::data();
 	}
 
+	// initializing field pulse varibale. ** added
+	// set centre time of field pulse
+	const double centre_time = 3.0 * pgi::field_pulse_time;
+
+	// set pulse_time^2
+	const double pulse_time_sq = pgi::field_pulse_time * pgi::field_pulse_time;
+
+
+	   // setting chiral magnetic field parameters based on model from experimental results by Luo et al . The field is defined to be of the form B(t) = B_0*(1-exp(-t/T1))*exp(-t/T2)
+    // T1 and T2 are spin and phonon lifetimes , spin liftime is short lived of the order 0.5 ps and Phonon lifetime is long lived of the order 500 ps
+	const double slow_time = 4.66E-10; //T2
+   	const double fast_time = 0.65E-12; //T1 aka electron lifetime
 	//loop sim::runs times
 	for(int r=0; r<sim::runs;r++){
 
@@ -292,6 +311,10 @@ void temperature_pulse(){
 
 			// Calculate temperature
 			sim::temperature=temperature_pulse_function(time_from_start);
+
+			// Calculate applied field strength
+			double time_from_centre = time_from_start - centre_time;
+			sim::H_applied = max_field * (1-exp(-(time_from_start)/(fast_time))) * exp(-(time_from_start)/slow_time);
 
 			// Integrate system
 			sim::integrate(1);

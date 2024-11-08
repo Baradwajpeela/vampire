@@ -64,7 +64,7 @@ void field_pulse(){
    sim::temperature = temp;
 
    // set centre time of field pulse
-   const double centre_time = 3.0 * pgi::field_pulse_time;
+   const double centre_time = pgi::field_pulse_time;
 
    // set pulse_time^2
    const double pulse_time_sq = pgi::field_pulse_time * pgi::field_pulse_time;
