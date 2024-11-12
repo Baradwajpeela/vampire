@@ -292,9 +292,8 @@ void temperature_pulse(){
 
 	   // setting chiral magnetic field parameters based on model from experimental results by Luo et al . The field is defined to be of the form B(t) = B_0*(1-exp(-t/T1))*exp(-t/T2)
     // T1 and T2 are spin and phonon lifetimes , spin liftime is short lived of the order 0.5 ps and Phonon lifetime is long lived of the order 500 ps
-	const double slow_time = 2.66E-10; //T2 spin lifetime
-   	const double fast_time = 0.05E-12; //T1 aka phonon lifetime
-	const double time_delay = 20E-12;
+	const double slow_time = sim::spin_lifetime; //T2 spin lifetime
+   	const double fast_time = sim::phonon_lifetime; //T1 aka phonon lifetime
 	//loop sim::runs times
 	for(int r=0; r<sim::runs;r++){
 
@@ -314,7 +313,7 @@ void temperature_pulse(){
 			sim::temperature=temperature_pulse_function(time_from_start);
 
 			// Calculate applied field strength
-			double time_from_peak = time_from_start-time_delay;
+			// double time_from_centre = time_from_start-centre_time; // enable for gaussian pulse
 			sim::H_applied = max_field * (1-exp(-(time_from_start)/(fast_time))) * exp(-(time_from_start)/slow_time);
 
 			// Integrate system

@@ -101,6 +101,8 @@ namespace sim{
 	double applied_field_angle_phi=0.0;
 	double applied_field_angle_theta=0.0;
 	bool applied_field_set_by_angle=false;
+	double spin_lifetime = 0.65e-12; // spin lifetime in chiral magnetic field ** added 
+	double phonon_lifetime = 466e-12; // Phonon lifetime in chiral magnetic field ** added
 
 	double fmr_field_strength = 0.0; // Oscillating field strength (Tesla)
 	double fmr_field_frequency = 1.0; // Oscillating field frequency (GHz)

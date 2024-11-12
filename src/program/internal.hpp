@@ -76,9 +76,6 @@ namespace program{
       // Field pulse program
       //------------------------------------------------------------------------
       extern double field_pulse_time; // length of field pulses (1 ns default)
-      extern double spin_lifetime;    // fast rising time ** added
-      extern double phonon_lifetime;  // fast rising time **added
-
       //------------------------------------------------------------------------
       // Exchange stiffness program
       //------------------------------------------------------------------------

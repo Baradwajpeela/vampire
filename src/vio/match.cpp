@@ -44,6 +44,7 @@
 // vio module headers
 #include "internal.hpp"
 #include "../create/internal.hpp"
+#include "../program/internal.hpp"
 
 namespace vin{
 
@@ -507,6 +508,23 @@ namespace vin{
             double hscc=atof(value.c_str());
             check_for_valid_value(hscc, word, line, prefix, unit, "none", 0.0, 1.0e40,"input","0.0 - 1.0E40");
             sim::TTG=hscc;
+            return EXIT_SUCCESS;
+        }
+        //-------------------------------------------------------------------- added to source code 
+        test="spin-lifetime";
+        if(word==test){
+            double spl=atof(value.c_str());
+            check_for_valid_value(spl, word, line, prefix, unit, "time", 1.0e-18, 1.0,"input","1 attosecond - 1 s");
+            sim::spin_lifetime=spl;
+            return EXIT_SUCCESS;
+        }
+        //--------------------------------------------------------------------
+        //-------------------------------------------------------------------- added to source code
+        test="phonon-lifetime";
+        if(word==test){
+            double phpl=atof(value.c_str());
+            check_for_valid_value(phpl, word, line, prefix, unit, "time", 1.0e-18, 1.0,"input","1 attosecond - 1 s");
+            sim::phonon_lifetime=phpl;
             return EXIT_SUCCESS;
         }
         //--------------------------------------------------------------------

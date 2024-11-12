@@ -155,6 +155,8 @@ namespace sim{
 	extern double TTG;  ///electron coupling constant
 	extern double TTTe; /// electron temperature
 	extern double TTTp; /// phonon temperature
+	extern double spin_lifetime; //// Spin lifetime for B field ** added
+	extern double phonon_lifetime; /////Phonon lifetime for chiral B fild *added
 
 	extern int system_simulation_flags;
 	extern int hamiltonian_simulation_flags[10];
