@@ -314,7 +314,7 @@ void temperature_pulse(){
 
 			// Calculate applied field strength
 			// double time_from_centre = time_from_start-centre_time; // enable for gaussian pulse
-			sim::H_applied = max_field * (1-exp(-(time_from_start)/(fast_time))) * exp(-(time_from_start)/slow_time);
+			sim::H_applied = max_field * (1-exp(-(time_from_start)/(fast_time))) * exp(-(time_from_start)/(slow_time));
 
 			// Integrate system
 			sim::integrate(1);
